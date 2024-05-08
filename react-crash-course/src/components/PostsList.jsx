@@ -5,7 +5,7 @@ import classes from "./PostsList.module.css";
 import NewPost from "./NewPost";
 import Modal from "./Modal";
 
-function PostsList(isPosting, onStopPosting) {
+function PostsList({ isPosting, onStopPosting }) {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
 
