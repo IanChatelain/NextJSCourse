@@ -1,10 +1,11 @@
+import { useState } from "react"; // Hook
 import classes from "./NewPost.module.css";
 
 function NewPost() {
-  let enteredBody = "";
+  const [enteredBody, setEnteredBody] = useState("");
 
   function changeBodyHandler(event) {
-    enteredBody = event.target.value;
+    setEnteredBody(event.target.value);
   }
 
   return (
