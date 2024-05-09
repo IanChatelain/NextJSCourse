@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Post from "./Post";
 import classes from "./PostsList.module.css";
@@ -8,7 +8,25 @@ import Modal from "./Modal";
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch("http://localhost:8080/posts");
+      const resData = await response.json();
+      setPosts(resData.posts);
+    }
+
+    fetchPosts();
+  }, []);
+
   function addPostHandler(postData) {
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     // setPosts([postData, ...posts]);
     // Better way for ensuring correct state during multiple pending state updates.
     setPosts((existingPosts) => [postData, ...existingPosts]);
